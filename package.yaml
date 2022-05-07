@@ -1,0 +1,52 @@
+name:                gol
+version:             0.1.0.0
+github:              "gz777/gol"
+license:             BSD3
+author:              "Grace Zh"
+maintainer:          "zhaog@farmingdale.edu"
+copyright:           "2022 Grace Zh"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+synopsis:           Conway's Game of Life (console version) 
+category:          Haskell 
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+# gz: put random under dependencies and executables->dependencies 5-6-22
+description:         Please see the README on GitHub at <https://github.com/gz777/gol#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- random
+
+library:
+  source-dirs: src
+
+executables:
+  gol-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - random
+    - gol
+
+tests:
+  gol-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - random
+    - gol
