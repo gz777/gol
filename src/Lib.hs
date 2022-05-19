@@ -6,7 +6,8 @@ import System.IO
 import System.Random (randoms, mkStdGen)
 
 {--
-CSC 321 Project Template
+Console implementation of Conway's Game of Life 
+The program was produced as a prototyping version for CSC321 final project spring 2022.
 4/19/2022 gz All rights reserved.
 updated: 5/4/2022 gz
 --}
@@ -55,7 +56,7 @@ genRand01 zz n =
 getNeighbors :: Int -> Int -> [Int] -> [Int]
 getNeighbors n z a
      | mod n z == 0 = 
-        [x | x <- [n-z, n-z-1, n+1, n+z, n+z+1], x >= 0, x < length a, n>=0, n< length a ]
+        [x | x <- [n-z, n-z+1, n+1, n+z, n+z+1], x >= 0, x < length a, n>=0, n< length a ]
      | mod (n+1) z == 0 =
         [x | x <- [n-z-1, n-z, n-1, n+z-1, n+z], x >= 0, x < length a, n>=0, n< length a ] 
      | otherwise =  
@@ -71,7 +72,7 @@ countLives n z a = sum [ a!!x | x <- (getNeighbors n z a)]
 
 -- input: n <- index of the list, a <- the list, z <- grid dim size
 -- output: new value of n  
--- when 3 always 1, regardless to keep or revive 
+-- Two values: 0 for death, 1 for life. When 3 always 1, regardless of staying alive or being revived 
 lifeOrDeath n z a
     | a!!n == 1 && k == 2 = 1
     | k == 3 = 1
@@ -96,20 +97,3 @@ playGame n z zz l
     | l==[] = error ("No data")
     | n > 0  = prtGrid z l >> playGame (n-1) z zz (evolution l z zz) 
 
-{--
-main :: IO()
-main =  do
-    putStr "Enter N for the N x N grid: "
-    z <- getLine 
-    putStr "Enter an integer number as the random seed: "
-    seed <- getLine
-    let z' = read z :: Int
-    let zz = z' * z'
-    let initGrid = genRand01 zz (read seed :: Int)
-    prtGrid z' initGrid 
-
-    putStr "Enter how many evolutions you want to play: " 
-    x <- getLine
-    let n = read x::Int
-    playGame n z' zz (evolution initGrid z' zz)
---}

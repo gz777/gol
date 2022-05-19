@@ -1,23 +1,9 @@
 # gol
 
-## local git init and add file README.md then push to origin
-
+## A quick implementation of Conway's Game of Life in Haskell
+## It was created as a prototyping version and template for CSC321 project Spring 2022
 ```
-git init
---git add .
-git add README.md
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin git@github.com:gz777/gol.git
-git push -u origin main
+git clone https://github.com/gz777/gol.git
+stack build
+stack exec gol-exe
 ```
-
-## or push an existing repository from the command line
-```
-git remote add origin git@github.com:gz777/gol.git
-git branch -M main
-git push -u origin main
-```
-
-## Conway's Game of Life in Haskell
-## It's created for CSC 321 Final Project Spring 2022
